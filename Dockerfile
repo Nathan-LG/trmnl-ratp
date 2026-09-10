@@ -15,6 +15,7 @@ WORKDIR /app
 
 COPY package*json pnpm-workspace.yaml pnpm-lock.yaml tsconfig.json ./
 COPY src ./src
+COPY public ./public
 
 RUN pnpm install --frozen-lockfile && \
     pnpm prune --prod
