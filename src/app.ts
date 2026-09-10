@@ -24,7 +24,24 @@ app.get("/", (req: express.Request, res: express.Response) => {
   }
 
   res.status(200).send({
-    test: true,
+    time: new Date().toISOString(),
+    lines: {
+      metro_12: {
+        next: [2, 4],
+        status: "running",
+        message: null,
+      },
+      tram_t3a: {
+        next: [null, null],
+        status: "stopped",
+        message: "La ligne est arrêtée en raison d'un incident.",
+      },
+      metro_14: {
+        next: [16, 34],
+        status: "disrupted",
+        message: "La ligne est perturbée en raison d'un incident.",
+      },
+    },
   });
 });
 
