@@ -1,8 +1,10 @@
 import express from "express";
+import { verifySecret } from "./helpers.ts";
 
 // Env vars
 
-const PRIM_API_KEY = process.env.API_KEY || "";
+const PRIM_API_KEY = process.env.PRIM_API_KEY || "";
+const VERSION = process.env.GIT_TAG || "dev";
 const API_KEY = process.env.API_KEY || "";
 const PORT = process.env.PORT || "";
 
@@ -15,15 +17,21 @@ app.use(express.json());
 // ----- Main page ----------------------------------------------------------
 
 app.get("/", (req: express.Request, res: express.Response) => {
-  if (req.headers["authorization"] === API_KEY) {
-    res.status(200).send({
-      test: true,
-    });
-  } else {
-    res.status(401).send("Unauthorized");
+  if (!verifySecret(req.headers["authorization"] as string, API_KEY)) {
+    console.log("Unauthorized");
+    res.status(401).json({ message: "Unauthorized" });
+    return;
   }
 
-  return;
+  res.status(200).send({
+    test: true,
+  });
+});
+
+// ----- Version -------------------------------------------------------------
+
+app.get("/version", (_: express.Request, res: express.Response) => {
+  res.status(200).send(VERSION);
 });
 
 // ----- Healthcheck --------------------------------------------------------
