@@ -12,7 +12,7 @@ const PORT = process.env.PORT || "";
 
 const app = express();
 app.disable("x-powered-by");
-app.use(express.static("public"));
+app.use(express.static(VERSION === "dev" ? "public" : "/app/dist/public"));
 app.use(express.json());
 
 // ----- Main page ----------------------------------------------------------
