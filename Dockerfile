@@ -31,6 +31,7 @@ RUN adduser --system --uid 1001 hono
 
 COPY --from=builder --chown=hono:nodejs /app/node_modules /app/node_modules
 COPY --from=builder --chown=hono:nodejs /app/src /app/dist
+COPY --from=builder --chown=hono:nodejs /app/public /app/dist/public
 COPY --from=builder --chown=hono:nodejs /app/package.json /app/package.json
 
 USER hono
