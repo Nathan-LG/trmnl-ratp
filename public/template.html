@@ -234,15 +234,16 @@
             <div>
               Metro <img src="https://ratp.psd.tf/12.jpg" alt="Metro 12" class="metro-badge" />
             </div>
-            <div class="metro-direction">vers Mairie d'Aubervilliers</div>
+            <div class="metro-direction">vers {{ source_1.lines.metro_12.terminus }}</div>
           </div>
           <div class="metro-content">
-            <div class="metro-time">3 <span>min</span></div>
-            <div class="metro-time">7 <span>min</span></div>
+            <div class="metro-time">{% if source_1.lines.metro_12.next[0] %}{{ source_1.lines.metro_12.next[0] }}{% else %}?{% endif %} <span>min</span></div>
+            <div class="metro-time">{% if source_1.lines.metro_12.next[1] %}{{ source_1.lines.metro_12.next[1] }}{% else %}?{% endif %} <span>min</span></div>
           </div>
           <div class="metro-message">
-            Tout roule sur votre ligne ! Ceci est sur deux lignes. Comment
-            va-t-on faire ? Oulah c'est très relou ça ! Pouet pouet pouet.
+            {% for message in source_1.lines.metro_12.message %}
+              {{ message }}
+            {% endfor %}
           </div>
         </div>
 
@@ -252,13 +253,15 @@
             <div>
               Tram <img src="https://ratp.psd.tf/t3a.jpg" alt="Tram T3a" class="metro-badge" />
             </div>
-            <div class="metro-direction">vers Porte de Vincennes</div>
+            <div class="metro-direction">vers {{ source_1.lines.tram_t3a.terminus }}</div>
           </div>
           <div class="metro-content">
-            <div class="metro-time">3 <span>min</span></div>
-            <div class="metro-time">13 <span>min</span></div>
+            <div class="metro-time">{% if source_1.lines.tram_t3a.next[0] %}{{ source_1.lines.tram_t3a.next[0] }}{% else %}?{% endif %} <span>min</span></div>
+            <div class="metro-time">{% if source_1.lines.tram_t3a.next[1] %}{{ source_1.lines.tram_t3a.next[1] }}{% else %}?{% endif %} <span>min</span></div>
           </div>
-          <div class="metro-message"></div>
+          <div class="metro-message">{% for message in source_1.lines.tram_t3a.message %}
+              {{ message }}
+            {% endfor %}</div>
         </div>
       </section>
 
@@ -268,7 +271,7 @@
           Temps réel
         </div>
         <div class="footer-battery">
-          65%
+          {{ sensors.battery }}%
           <div class="battery-icon">
             <div class="battery-level"></div>
           </div>
