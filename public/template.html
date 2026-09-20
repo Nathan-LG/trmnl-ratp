@@ -101,7 +101,7 @@
       }
       .battery-level {
         height: 100%;
-        width: 65%; /* Niveau de batterie statique (ex: 65%) */
+        width: {{ source_1.battery }}%;
         background-color: #000000;
       }
 
@@ -271,7 +271,7 @@
           Temps réel
         </div>
         <div class="footer-battery">
-          {{ sensors.battery }}%
+          {{ source_1.battery }}%
           <div class="battery-icon">
             <div class="battery-level"></div>
           </div>
