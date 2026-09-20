@@ -164,6 +164,15 @@
         color: #ffffff;
       }
 
+      .metro-14-message {
+        font-size: 45px;
+        font-weight: 500;
+        padding: 15px 30px 20px 30px;
+        border-radius: 18px;
+        background: #000000;
+        color: #ffffff;
+      }
+
       /* ----------------------------------------------------
        SECTION 2 : Perturbations (3 Lignes)
        ---------------------------------------------------- */
@@ -247,6 +256,22 @@
           </div>
         </div>
 
+        {% if source_1.lines.metro_14.message[0] %}
+        <!-- Métro 14 -->
+        <div class="metro-card">
+          <div class="metro-title">
+            <div>
+              Metro <img src="https://ratp.psd.tf/14.jpg" alt="Metro 14" class="metro-badge" />
+            </div>
+          </div>
+          <div class="metro-14-message">
+            {% for message in source_1.lines.metro_14.message %}
+              {{ message }}
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
         <!-- Tram T3a -->
         <div class="metro-card">
           <div class="metro-title">
@@ -266,10 +291,6 @@
       </section>
 
       <footer class="footer">
-        <div class="footer-status">
-          <img src="https://ratp.psd.tf/realtime.jpg" alt="Temps réel" />
-          Temps réel
-        </div>
         <div class="footer-battery">
           {{ source_1.battery }}%
           <div class="battery-icon">
