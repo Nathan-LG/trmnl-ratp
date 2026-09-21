@@ -251,7 +251,7 @@
           </div>
           <div class="metro-message">
             {% for message in source_1.lines.metro_12.message %}
-              {{ message }}
+              {{ message }}<br />
             {% endfor %}
           </div>
         </div>
@@ -266,7 +266,7 @@
           </div>
           <div class="metro-14-message">
             {% for message in source_1.lines.metro_14.message %}
-              {{ message }}
+              {{ message }}<br />
             {% endfor %}
           </div>
         </div>
@@ -285,7 +285,7 @@
             <div class="metro-time">{% if source_1.lines.tram_t3a.next[1] %}{{ source_1.lines.tram_t3a.next[1] }}{% else %}?{% endif %} <span>min</span></div>
           </div>
           <div class="metro-message">{% for message in source_1.lines.tram_t3a.message %}
-              {{ message }}
+              {{ message }}<br />
             {% endfor %}</div>
         </div>
       </section>
