@@ -64,8 +64,14 @@ app.get("/", async (req: express.Request, res: express.Response) => {
       ));
     } catch (error) {
       console.log("Failed to refresh Terminus token:", error);
-      res.status(500).json({ message: "Failed to refresh Terminus token" });
-      return;
+
+      try {
+        ({ accessToken, refreshToken } = await loginTerminus());
+      } catch (error) {
+        console.log("Failed to log in to Terminus:", error);
+        res.status(500).json({ message: "Failed to log in to Terminus" });
+        return;
+      }
     }
   }
 
